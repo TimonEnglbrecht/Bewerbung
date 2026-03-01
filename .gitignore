@@ -1,0 +1,7 @@
+# Bewerbungsunterlagen – nicht öffentlich hochladen
+*.docx
+*.doc
+
+# System
+.DS_Store
+Thumbs.db

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Timon Englbrecht – Kaufmann, Mitgründer, angehender Wirtschaftsinformatiker">
+    <title>Timon Englbrecht</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:            #ffffff;
+            --surface:       #f1f5f9;
+            --surface-2:     #e2e8f0;
+            --text-primary:  #0f172a;
+            --text-secondary:#475569;
+            --accent:        #2563eb;
+            --accent-hover:  #1d4ed8;
+            --accent-light:  #eff6ff;
+            --border:        #e2e8f0;
+            --shadow:        0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
+            --shadow-hover:  0 4px 12px rgba(37,99,235,.15), 0 8px 32px rgba(0,0,0,.08);
+            --radius:        12px;
+            --nav-h:         64px;
+            --ease:          cubic-bezier(.4,0,.2,1);
+        }
+
+        [data-theme="dark"] {
+            --bg:            #0f172a;
+            --surface:       #1e293b;
+            --surface-2:     #334155;
+            --text-primary:  #f1f5f9;
+            --text-secondary:#94a3b8;
+            --accent:        #3b82f6;
+            --accent-hover:  #2563eb;
+            --accent-light:  #1e3a5f;
+            --border:        #334155;
+            --shadow:        0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
+            --shadow-hover:  0 4px 12px rgba(59,130,246,.2), 0 8px 32px rgba(0,0,0,.3);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background .3s ease, color .3s ease;
+            overflow-x: hidden;
+        }
+
+        /* ===== HELPERS ===== */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 100px 0; }
+        h1, h2, h3 { line-height: 1.2; }
+
+        .section-eyebrow {
+            font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: .4rem;
+        }
+        .section-title {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 800; letter-spacing: -.02em; margin-bottom: .4rem;
+        }
+        .section-sub {
+            color: var(--text-secondary); font-size: .95rem; margin-bottom: 3rem;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            height: var(--nav-h);
+            background: rgba(255,255,255,.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: background .3s;
+        }
+        [data-theme="dark"] nav { background: rgba(15,23,42,.88); }
+
+        .nav-inner {
+            height: 100%; display: flex;
+            align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-weight: 900; font-size: 1.1rem;
+            color: var(--text-primary); text-decoration: none; letter-spacing: -.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: .82rem; font-weight: 600; letter-spacing: .01em;
+            transition: color .2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .btn-pdf-nav {
+            display: inline-flex; align-items: center; gap: .4rem;
+            padding: 6px 14px;
+            background: var(--accent-light); color: var(--accent);
+            border: 1px solid rgba(37,99,235,.25); border-radius: 8px;
+            text-decoration: none; font-size: .8rem; font-weight: 700;
+            letter-spacing: .01em; transition: all .2s var(--ease);
+            white-space: nowrap;
+        }
+        .btn-pdf-nav:hover {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+        }
+        [data-theme="dark"] .btn-pdf-nav {
+            border-color: rgba(59,130,246,.3);
+        }
+
+        .theme-btn {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; padding: 7px 11px; cursor: pointer;
+            color: var(--text-secondary); font-size: .9rem; line-height: 1;
+            transition: all .2s; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .theme-btn:hover { background: var(--surface-2); color: var(--text-primary); }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: var(--nav-h); position: relative; overflow: hidden;
+        }
+        .hero-glow {
+            position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(ellipse 75% 55% at 65% 45%,
+                rgba(37,99,235,.07) 0%, transparent 70%);
+        }
+        [data-theme="dark"] .hero-glow {
+            background: radial-gradient(ellipse 75% 55% at 65% 45%,
+                rgba(59,130,246,.1) 0%, transparent 70%);
+        }
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: var(--accent-light); color: var(--accent);
+            border: 1px solid rgba(37,99,235,.2); border-radius: 100px;
+            padding: 6px 14px; font-size: .72rem; font-weight: 700;
+            letter-spacing: .05em; text-transform: uppercase; margin-bottom: 1.5rem;
+            opacity: 0; transform: translateY(16px);
+            animation: fadeUp .6s var(--ease) forwards .1s;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+            animation: pulse 2s infinite; flex-shrink: 0;
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 7.5vw, 5.8rem);
+            font-weight: 900; letter-spacing: -.03em; line-height: 1.0;
+            margin-bottom: 1rem;
+            opacity: 0; transform: translateY(16px);
+            animation: fadeUp .6s var(--ease) forwards .22s;
+        }
+
+        .hero-typewriter {
+            font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary); margin-bottom: 1.75rem; min-height: 2em;
+            font-weight: 500;
+            opacity: 0; transform: translateY(16px);
+            animation: fadeUp .6s var(--ease) forwards .38s;
+        }
+        .tw-text { color: var(--accent); font-weight: 700; }
+        .tw-cursor {
+            display: inline-block; width: 2px; height: 1.1em;
+            background: var(--accent); margin-left: 2px; vertical-align: middle;
+            animation: blink .75s step-end infinite;
+        }
+
+        .hero-desc {
+            font-size: .97rem; color: var(--text-secondary); font-weight: 500;
+            max-width: 540px; margin-bottom: 2.25rem;
+            opacity: 0; transform: translateY(16px);
+            animation: fadeUp .6s var(--ease) forwards .52s;
+        }
+
+        .hero-btns {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            opacity: 0; transform: translateY(16px);
+            animation: fadeUp .6s var(--ease) forwards .66s;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: 12px 26px; border-radius: var(--radius);
+            font-size: .88rem; font-weight: 700; text-decoration: none;
+            cursor: pointer; border: none; transition: all .25s var(--ease);
+            font-family: 'Montserrat', sans-serif; letter-spacing: .01em;
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover {
+            background: var(--accent-hover); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37,99,235,.3);
+        }
+        .btn-outline {
+            background: transparent; color: var(--text-primary);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline:hover { background: var(--surface); transform: translateY(-2px); }
+
+        .btn-pdf-large {
+            display: inline-flex; align-items: center; gap: .6rem;
+            padding: 12px 28px; border-radius: var(--radius);
+            background: transparent; color: var(--accent);
+            border: 1.5px solid var(--accent); text-decoration: none;
+            font-size: .88rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
+            transition: all .25s var(--ease); letter-spacing: .01em;
+        }
+        .btn-pdf-large:hover {
+            background: var(--accent); color: #fff; transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37,99,235,.25);
+        }
+
+        .scroll-hint {
+            position: absolute; bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: .4rem;
+            color: var(--text-secondary); font-size: .68rem; letter-spacing: .1em;
+            text-transform: uppercase; font-weight: 600;
+            opacity: 0; animation: fadeUp .6s ease forwards 1.2s;
+        }
+        .scroll-hint .chevron {
+            width: 18px; height: 18px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            animation: bounce 2s ease infinite;
+        }
+
+        /* ===== ABOUT ===== */
+        #about { background: var(--surface); }
+
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center;
+        }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1rem; font-size: .97rem; font-weight: 500; }
+
+        .traits {
+            display: grid; grid-template-columns: 1fr 1fr; gap: .6rem;
+        }
+        .trait {
+            display: flex; align-items: center; gap: .6rem;
+            padding: 9px 13px; background: var(--bg);
+            border: 1px solid var(--border); border-radius: 8px;
+            font-size: .8rem; font-weight: 600;
+            transition: border-color .2s, color .2s;
+        }
+        .trait:hover { border-color: var(--accent); color: var(--accent); }
+        .trait i { width: 14px; text-align: center; font-size: .85rem; color: var(--accent); }
+
+        .langs {
+            display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem;
+        }
+        .lang-tag {
+            padding: 5px 13px; background: var(--accent-light);
+            color: var(--accent); border-radius: 100px;
+            font-size: .75rem; font-weight: 700;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+        .skill-cat {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.4rem;
+            transition: all .3s var(--ease);
+        }
+        .skill-cat:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(37,99,235,.4); transform: translateY(-3px);
+        }
+        .skill-cat-title {
+            font-size: .7rem; font-weight: 800; letter-spacing: .09em;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: .9rem; display: flex; align-items: center; gap: .5rem;
+        }
+        .skill-cat-title i { font-size: .85rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+        .skill-tag {
+            padding: 4px 11px; background: var(--bg);
+            border: 1px solid var(--border); border-radius: 6px;
+            font-size: .78rem; font-weight: 600; color: var(--text-secondary);
+            transition: border-color .2s;
+        }
+        .skill-cat:hover .skill-tag { border-color: rgba(37,99,235,.25); }
+
+        /* ===== EXPERIENCE ===== */
+        #experience { background: var(--surface); }
+
+        .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+        .col-label {
+            font-size: .82rem; font-weight: 800; letter-spacing: .04em;
+            margin-bottom: 1.75rem; padding-bottom: .7rem;
+            border-bottom: 2px solid var(--border);
+            display: flex; align-items: center; gap: .6rem; color: var(--text-primary);
+        }
+        .col-label i { color: var(--accent); }
+
+        .timeline { position: relative; padding-left: 1.75rem; }
+        .timeline::before {
+            content: ''; position: absolute;
+            left: 0; top: 6px; bottom: 6px; width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        .tl-item { position: relative; padding-bottom: 2.25rem; }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-dot {
+            position: absolute; left: -2.15rem; top: 5px;
+            width: 11px; height: 11px; border-radius: 50%;
+            background: var(--accent); border: 2px solid var(--bg);
+            box-shadow: 0 0 0 3px rgba(37,99,235,.18);
+        }
+        .tl-period { font-size: .72rem; font-weight: 700; color: var(--accent); margin-bottom: .2rem; letter-spacing: .02em; }
+        .tl-company { font-size: .97rem; font-weight: 700; margin-bottom: .15rem; }
+        .tl-role { font-size: .82rem; color: var(--text-secondary); font-weight: 500; }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.75rem;
+            text-decoration: none; color: inherit; display: block;
+            transition: all .3s var(--ease); position: relative; overflow: hidden;
+        }
+        .project-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--accent);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .project-card:hover::after { transform: scaleX(1); }
+        .project-card:hover {
+            box-shadow: var(--shadow-hover); transform: translateY(-5px);
+            border-color: rgba(37,99,235,.3);
+        }
+        .project-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--accent-light); color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem; margin-bottom: .9rem;
+        }
+        .project-name { font-size: 1.1rem; font-weight: 800; margin-bottom: .5rem; }
+        .project-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .85rem; }
+        .project-tag {
+            padding: 3px 9px; background: var(--accent-light);
+            color: var(--accent); border-radius: 4px;
+            font-size: .7rem; font-weight: 700;
+        }
+        .project-desc { font-size: .84rem; color: var(--text-secondary); margin-bottom: 1.25rem; font-weight: 500; }
+        .project-footer {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .project-url { font-size: .78rem; color: var(--accent); font-weight: 700; }
+        .project-period { font-size: .72rem; color: var(--text-secondary); font-weight: 500; }
+
+        /* ===== CONTACT ===== */
+        #contact { background: var(--surface); text-align: center; }
+
+        .contact-box {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2.75rem 2.5rem;
+            max-width: 560px; margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+        .contact-photo {
+            width: 110px; height: 110px;
+            border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(37,99,235,.2);
+            margin-bottom: .9rem;
+            display: block; margin-left: auto; margin-right: auto;
+        }
+        .contact-photo-fallback {
+            width: 110px; height: 110px; border-radius: 50%;
+            background: var(--accent-light); color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; margin: 0 auto .9rem;
+            border: 3px solid var(--accent);
+        }
+        .contact-name {
+            font-size: 1.15rem; font-weight: 800; margin-bottom: .25rem;
+        }
+        .contact-tagline {
+            font-size: .8rem; color: var(--text-secondary);
+            font-weight: 500; margin-bottom: 1.5rem;
+        }
+        .contact-links {
+            display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .contact-link {
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: 9px 16px; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 8px;
+            text-decoration: none; color: var(--text-primary);
+            font-size: .82rem; font-weight: 600;
+            transition: all .25s var(--ease);
+        }
+        .contact-link i { font-size: .85rem; color: var(--accent); }
+        .contact-link:hover {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .contact-link:hover i { color: #fff; }
+
+        .contact-divider {
+            display: flex; align-items: center; gap: 1rem;
+            margin: 1.5rem 0; color: var(--text-secondary); font-size: .75rem; font-weight: 600;
+        }
+        .contact-divider::before, .contact-divider::after {
+            content: ''; flex: 1; height: 1px; background: var(--border);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 1.75rem 0; text-align: center;
+            color: var(--text-secondary); font-size: .75rem; font-weight: 500;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; } 50% { opacity: .3; }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; } 50% { opacity: 0; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50%       { transform: rotate(45deg) translateY(5px); }
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(22px);
+            transition: opacity .65s var(--ease), transform .65s var(--ease);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: .1s; }
+        .reveal-d2 { transition-delay: .2s; }
+        .reveal-d3 { transition-delay: .3s; }
+        .reveal-d4 { transition-delay: .4s; }
+
+        /* ===== MODE SELECT OVERLAY ===== */
+        .mode-overlay {
+            position: fixed; inset: 0; z-index: 300;
+            background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity .5s var(--ease), visibility .5s;
+        }
+        .mode-overlay.hidden {
+            opacity: 0; visibility: hidden; pointer-events: none;
+        }
+        .mode-overlay-glow {
+            position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%,
+                rgba(37,99,235,.07) 0%, transparent 70%);
+        }
+        [data-theme="dark"] .mode-overlay-glow {
+            background: radial-gradient(ellipse 60% 50% at 50% 50%,
+                rgba(59,130,246,.1) 0%, transparent 70%);
+        }
+        .mode-overlay-theme {
+            position: absolute; top: 1.25rem; right: 1.5rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; padding: 7px 11px;
+            cursor: pointer; font-size: .9rem; line-height: 1;
+            color: var(--text-secondary); transition: all .2s; z-index: 1;
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+        }
+        .mode-overlay-theme:hover { background: var(--surface-2); color: var(--text-primary); }
+
+        .mode-inner {
+            position: relative; z-index: 1;
+            text-align: center; padding: 2rem 1.5rem;
+            animation: fadeUp .6s var(--ease) both;
+        }
+        .mode-title {
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 900; letter-spacing: -.03em; margin-bottom: .5rem;
+        }
+        .mode-title span { color: var(--accent); }
+        .mode-sub {
+            color: var(--text-secondary); font-size: 1rem; font-weight: 500; margin-bottom: 3rem;
+        }
+        .mode-cards {
+            display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+        }
+        .mode-card {
+            background: var(--surface); border: 1.5px solid var(--border);
+            border-radius: 16px; padding: 2.25rem 1.75rem;
+            width: 240px; cursor: pointer; text-align: center;
+            transition: all .3s var(--ease);
+            display: flex; flex-direction: column; align-items: center; gap: .65rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .mode-card:hover {
+            border-color: var(--accent); box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+        .mode-card-icon {
+            width: 60px; height: 60px; border-radius: 14px;
+            background: var(--accent-light); color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .mode-card-title { font-size: 1.1rem; font-weight: 800; color: var(--text-primary); }
+        .mode-card-desc { font-size: .8rem; color: var(--text-secondary); line-height: 1.4; font-weight: 500; }
+        .mode-card-arrow {
+            margin-top: .4rem; font-size: .78rem; font-weight: 700;
+            color: var(--accent); opacity: 0;
+            transition: opacity .2s, transform .2s; transform: translateX(-4px);
+        }
+        .mode-card:hover .mode-card-arrow { opacity: 1; transform: translateX(0); }
+
+        /* ===== MODE-SPECIFIC VISIBILITY ===== */
+        .mode-content { display: none; }
+        body.mode-work .mode-content.for-work { display: block; }
+        body.mode-uni  .mode-content.for-uni  { display: block; }
+
+        .skill-tag-mode { display: none; }
+        body.mode-work .skill-tag-mode.for-work { display: inline-block; }
+        body.mode-uni  .skill-tag-mode.for-uni  { display: inline-block; }
+
+        /* ===== WHY SECTION ===== */
+        #why { background: var(--bg); }
+
+        .why-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.25rem;
+        }
+        .why-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1.6rem 1.5rem; transition: all .3s var(--ease);
+        }
+        .why-card:hover { box-shadow: var(--shadow-hover); transform: translateX(3px); }
+        .why-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--accent-light); color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; margin-bottom: .85rem;
+        }
+        .why-card-title { font-size: .9rem; font-weight: 800; margin-bottom: .4rem; }
+        .why-card-desc  { font-size: .84rem; color: var(--text-secondary); font-weight: 500; line-height: 1.65; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links li:not(:last-child):not(:nth-last-child(2)):not(:nth-last-child(3)) { display: none; }
+            .about-grid, .exp-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .traits { grid-template-columns: 1fr 1fr; }
+            section { padding: 72px 0; }
+            .contact-box { padding: 2rem 1.25rem; }
+        }
+        @media (max-width: 480px) {
+            .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== MODE SELECT OVERLAY ===== -->
+<div id="modeOverlay" class="mode-overlay">
+    <div class="mode-overlay-glow"></div>
+    <button class="mode-overlay-theme" id="overlayThemeBtn" aria-label="Dark Mode">
+        <i id="overlayThemeIcon" class="fa-solid fa-moon"></i>
+    </button>
+    <div class="mode-inner">
+        <h1 class="mode-title">Willkommen<span>.</span></h1>
+        <p class="mode-sub">Für wen darf ich mich vorstellen?</p>
+        <div class="mode-cards">
+            <button class="mode-card" data-mode="uni">
+                <div class="mode-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <span class="mode-card-title">Universität</span>
+                <span class="mode-card-desc">Bewerbung zum Wirtschaftsinformatik-Studium</span>
+                <span class="mode-card-arrow">Weiter →</span>
+            </button>
+            <button class="mode-card" data-mode="work">
+                <div class="mode-card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <span class="mode-card-title">Arbeitgeber</span>
+                <span class="mode-card-desc">Werkstudentenstelle im Finanz- oder Techbereich</span>
+                <span class="mode-card-arrow">Weiter →</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+    <div class="container nav-inner">
+        <a href="#hero" class="nav-logo">Timon<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">Über mich</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Werdegang</a></li>
+            <li><a href="#projects">Projekte</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+            <li>
+                <!-- TODO: PDF-Datei unter assets/Bewerbungsunterlagen.pdf ablegen -->
+                <a href="assets/Bewerbungsunterlagen.pdf" download class="btn-pdf-nav">
+                    <i class="fa-solid fa-file-pdf"></i> Unterlagen
+                </a>
+            </li>
+            <li>
+                <button class="theme-btn" id="themeBtn" aria-label="Dark Mode umschalten">
+                    <i id="themeBtnIcon" class="fa-solid fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            <span class="badge-text"></span>
+        </div>
+        <h1 class="hero-name">Timon<br>Englbrecht.</h1>
+        <p class="hero-typewriter">
+            <span class="tw-text" id="twText"></span><span class="tw-cursor"></span>
+        </p>
+        <p class="hero-desc" id="heroDesc"></p>
+        <div class="hero-btns">
+            <a href="#contact" class="btn btn-primary" id="heroCta">
+                <i class="fa-solid fa-paper-plane"></i> <span id="heroCtaText">Kontakt aufnehmen</span>
+            </a>
+            <a href="#why" class="btn btn-outline" id="heroCtaWhy" style="display:none;">
+                <i class="fa-solid fa-circle-question"></i> <span id="heroCtaWhyText"></span>
+            </a>
+            <a href="#projects" class="btn btn-outline">
+                <i class="fa-solid fa-layer-group"></i> Projekte ansehen
+            </a>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="chevron"></div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Über mich</p>
+            <h2 class="section-title">Wer steckt dahinter?</h2>
+            <p class="section-sub">Hintergrund, Persönlichkeit & Antrieb</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal reveal-d1">
+                <p>
+                    Hallo, ich bin Timon — geboren 2003 in Köln, aufgewachsen in Hürth.
+                    Nach meiner Ausbildung zum Kaufmann für Versicherungen und Finanzanlagen
+                    bei der Allianz habe ich den nächsten Schritt gewagt: Mitgründer einer
+                    eigenen GbR und Bewerber für das Wirtschaftsinformatik-Studium.
+                </p>
+                <p id="aboutP2">
+                    Mein Antrieb liegt an der Schnittstelle von Finanzwelt und Technologie.
+                    Ich automatisiere Prozesse, baue digitale Produkte und frage mich stets,
+                    wie Abläufe smarter werden können — mit KI, Low-Code und echtem Verständnis
+                    für das Geschäft dahinter.
+                </p>
+                <div class="langs">
+                    <span class="lang-tag">🇩🇪 Deutsch – Muttersprache</span>
+                    <span class="lang-tag">🇬🇧 Englisch – B2</span>
+                    <span class="lang-tag">🇫🇷 Französisch – B1</span>
+                    <span class="lang-tag">🚗 Führerschein A & B</span>
+                </div>
+            </div>
+            <div class="reveal reveal-d2">
+                <div class="traits">
+                    <div class="trait"><i class="fa-solid fa-bullseye"></i> Verantwortungsbewusst</div>
+                    <div class="trait"><i class="fa-solid fa-comments"></i> Kommunikativ</div>
+                    <div class="trait"><i class="fa-solid fa-handshake"></i> Kontaktfreudig</div>
+                    <div class="trait"><i class="fa-solid fa-lightbulb"></i> Überzeugungsstark</div>
+                    <div class="trait"><i class="fa-solid fa-chart-line"></i> Lernmotiviert</div>
+                    <div class="trait"><i class="fa-solid fa-laptop-code"></i> Digital affin</div>
+                    <div class="trait"><i class="fa-solid fa-magnifying-glass"></i> Analytisch</div>
+                    <div class="trait"><i class="fa-solid fa-list-check"></i> Strukturiert</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Skills</p>
+            <h2 class="section-title">Was ich mitbringe</h2>
+            <p class="section-sub">Technische & fachliche Kompetenzen</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-cat reveal reveal-d1">
+                <div class="skill-cat-title"><i class="fa-solid fa-gears"></i> Automatisierung & Tools</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Make / Integromat</span>
+                    <span class="skill-tag">N8N</span>
+                    <span class="skill-tag">Prozessautomatisierung</span>
+                    <span class="skill-tag">Workflow-Optimierung</span>
+                    <span class="skill-tag">API-Grundverständnis</span>
+                </div>
+            </div>
+            <div class="skill-cat reveal reveal-d2">
+                <div class="skill-cat-title"><i class="fa-solid fa-robot"></i> KI & Produktivität</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">KI-Tools</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                    <span class="skill-tag">MS Office</span>
+                </div>
+            </div>
+            <div class="skill-cat reveal reveal-d3">
+                <div class="skill-cat-title"><i class="fa-solid fa-code"></i> Entwicklung</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML & CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag skill-tag-mode for-uni">Cloud-Architektur</span>
+                    <span class="skill-tag skill-tag-mode for-uni">Mobile Development</span>
+                    <span class="skill-tag skill-tag-mode for-work">API-Integration</span>
+                    <span class="skill-tag skill-tag-mode for-work">ProfessionalWorks</span>
+                </div>
+            </div>
+            <div class="skill-cat reveal reveal-d4">
+                <div class="skill-cat-title"><i class="fa-solid fa-building-columns"></i> Versicherung & Finanzen</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">PKV-Sachbearbeitung</span>
+                    <span class="skill-tag">Maklerprozesse</span>
+                    <span class="skill-tag">Vertragsmanagement</span>
+                    <span class="skill-tag">Kundenberatung</span>
+                    <span class="skill-tag">Bedarfsanalyse</span>
+                    <span class="skill-tag skill-tag-mode for-work">Makler-Digitalisierung</span>
+                    <span class="skill-tag skill-tag-mode for-uni">Business Intelligence</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Werdegang</p>
+            <h2 class="section-title">Erfahrung & Ausbildung</h2>
+            <p class="section-sub">Mein bisheriger Weg</p>
+        </div>
+        <div class="exp-grid">
+            <div class="reveal reveal-d1">
+                <div class="col-label"><i class="fa-solid fa-briefcase"></i> Berufserfahrung</div>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Jan 2026 – heute</div>
+                        <div class="tl-company">Continentale Krankenversicherung a.G.</div>
+                        <div class="tl-role">Sachbearbeiter Vertragsservice · PKV</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Okt 2025 – heute</div>
+                        <div class="tl-company">EnglGroup GbR</div>
+                        <div class="tl-role">Mitgründer · Lead Performance Plattform</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Feb 2025 – Jan 2026</div>
+                        <div class="tl-company">V3IME GmbH</div>
+                        <div class="tl-role">Praktikant · Versicherungs- & Immobilienmakler</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Aug 2022 – Jan 2025</div>
+                        <div class="tl-company">Allianz Mertens & Scheurer OHG</div>
+                        <div class="tl-role">Auszubildender · Kranken- & Pflegeversicherung</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal reveal-d2">
+                <div class="col-label"><i class="fa-solid fa-graduation-cap"></i> Ausbildung</div>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Aug 2022 – Jan 2025</div>
+                        <div class="tl-company">Berufskolleg Südstadt Köln</div>
+                        <div class="tl-role">Kaufmann für Versicherungen und Finanzanlagen</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-dot"></div>
+                        <div class="tl-period">Aug 2019 – Jun 2022</div>
+                        <div class="tl-company">Albert-Schweitzer-Gymnasium Hürth</div>
+                        <div class="tl-role">Fachhochschulreife (9.–11. Klasse)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Projekte</p>
+            <h2 class="section-title">Was ich gebaut habe</h2>
+            <p class="section-sub">Eigene Produkte & Nebenprojekte</p>
+        </div>
+        <div class="projects-grid">
+            <a href="https://meine.v3ime.de" target="_blank" rel="noopener" class="project-card reveal reveal-d1">
+                <div class="project-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="project-name">Meine V3IME</div>
+                <div class="project-tags">
+                    <span class="project-tag">PWA</span>
+                    <span class="project-tag">Kundenportal</span>
+                    <span class="project-tag">Versicherungen</span>
+                </div>
+                <div class="project-desc">
+                    Progressive Web App zur übersichtlichen Verwaltung eigener Versicherungen —
+                    entwickelt für den Endkunden im Maklerumfeld.
+                </div>
+                <div class="project-footer">
+                    <span class="project-url"><i class="fa-solid fa-arrow-up-right-from-square"></i> meine.v3ime.de</span>
+                    <span class="project-period">Apr – Sep 2025</span>
+                </div>
+            </a>
+            <a href="https://pandacards.de" target="_blank" rel="noopener" class="project-card reveal reveal-d2">
+                <div class="project-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="project-name">PandaCards</div>
+                <div class="project-tags">
+                    <span class="project-tag">SaaS</span>
+                    <span class="project-tag">Digitale Visitenkarte</span>
+                    <span class="project-tag">Tracking</span>
+                </div>
+                <div class="project-desc">
+                    Tool zur schnellen Erstellung digitaler Visitenkarten mit integriertem
+                    Link-Tracking — für Profis, die wissen wollen, wer schaut.
+                </div>
+                <div class="project-footer">
+                    <span class="project-url"><i class="fa-solid fa-arrow-up-right-from-square"></i> pandacards.de</span>
+                    <span class="project-period">Feb 2026</span>
+                </div>
+            </a>
+            <a href="https://englgroup.de" target="_blank" rel="noopener" class="project-card reveal reveal-d3">
+                <div class="project-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="project-name">EnglGroup</div>
+                <div class="project-tags">
+                    <span class="project-tag">Lead Generation</span>
+                    <span class="project-tag">Automatisierung</span>
+                    <span class="project-tag">Startup</span>
+                </div>
+                <div class="project-desc">
+                    Plattform mit Tools zur Verbesserung der Neukunden-Akquise —
+                    eigenes Unternehmen, Mitgründung Oktober 2025, heute aktiv.
+                </div>
+                <div class="project-footer">
+                    <span class="project-url"><i class="fa-solid fa-arrow-up-right-from-square"></i> englgroup.de</span>
+                    <span class="project-period">Okt 2025 – heute</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY SECTION ===== -->
+<section id="why">
+    <div class="container">
+
+        <!-- FONDSFINANZ -->
+        <div class="mode-content for-work">
+            <div class="section-header reveal">
+                <p class="section-eyebrow">Warum FondsFinanz</p>
+                <h2 class="section-title">Keine Unbekannte.</h2>
+                <p class="section-sub">Ich kenne eure Welt aus erster Hand — und genau das will ich einbringen.</p>
+            </div>
+            <div class="why-cards">
+                <div class="why-card reveal reveal-d1">
+                    <div class="why-card-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                    <div class="why-card-title">Praxisnah bekannt</div>
+                    <div class="why-card-desc">
+                        Während meiner Zeit bei V3IME habe ich direkt erlebt, wie FondsFinanz in der Praxis arbeitet —
+                        welche Prozesse Berater täglich nutzen und wo digitale Unterstützung den größten Hebel hat.
+                    </div>
+                </div>
+                <div class="why-card reveal reveal-d2">
+                    <div class="why-card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="why-card-title">Eigeninitiative statt Abwarten</div>
+                    <div class="why-card-desc">
+                        Bei der Continentale habe ich eigenständig eine interaktive Einarbeitungsanleitung in HTML &amp; JS entwickelt,
+                        weil strukturierte Dokumentation fehlte. Ich sehe Lücken — und schließe sie.
+                    </div>
+                </div>
+                <div class="why-card reveal reveal-d3">
+                    <div class="why-card-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="why-card-title">Langfristige Perspektive</div>
+                    <div class="why-card-desc">
+                        Mein Ziel ist es, langfristig Teil von FondsFinanz zu werden und an Projekten mitzuwirken,
+                        die Technologie und Vertrieb zusammenbringen: Prozessoptimierung, Digitalisierung von
+                        Vermittlerprozessen, Datenanalyse.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HDBW -->
+        <div class="mode-content for-uni">
+            <div class="section-header reveal">
+                <p class="section-eyebrow">Warum HDBW</p>
+                <h2 class="section-title">Bewusst gewählt.</h2>
+                <p class="section-sub">Nicht irgendein Studium — genau dieser Weg, genau jetzt.</p>
+            </div>
+            <div class="why-cards">
+                <div class="why-card reveal reveal-d1">
+                    <div class="why-card-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <div class="why-card-title">Mobile & Cloud – aus Überzeugung</div>
+                    <div class="why-card-desc">
+                        Wie Apps mobil funktionieren, wie APIs sauber integriert werden — das sind keine Abstraktionen
+                        für mich. Mit eigenen Projekten habe ich genau das bereits in der Praxis erlebt und will es
+                        jetzt fundiert ausbauen.
+                    </div>
+                </div>
+                <div class="why-card reveal reveal-d2">
+                    <div class="why-card-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="why-card-title">Kleines Umfeld, echter Austausch</div>
+                    <div class="why-card-desc">
+                        Ich lerne am besten im direkten Austausch, nicht im anonymen Hörsaal.
+                        Kleine Studiengruppen und praxiserfahrene Lehrende sind für mich kein nettes Extra —
+                        sie sind ein entscheidender Grund für die HDBW.
+                    </div>
+                </div>
+                <div class="why-card reveal reveal-d3">
+                    <div class="why-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="why-card-title">Vorsprung durch Praxis</div>
+                    <div class="why-card-desc">
+                        Ich bringe mit, was viele erst noch erwerben müssen: echtes Verständnis für die Schnittstelle
+                        zwischen Business und IT — gestützt durch eigene Projekte und Berufspraxis in der Finanzbranche.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Kontakt</p>
+            <h2 class="section-title">Let's talk.</h2>
+            <p class="section-sub">Ich freue mich auf deine Nachricht</p>
+        </div>
+        <div class="contact-box reveal">
+            <!-- TODO: Foto als foto.jpg in den gleichen Ordner legen -->
+            <img src="foto.jpg" alt="Timon Englbrecht" class="contact-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="contact-photo-fallback" style="display:none;">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="contact-name">Timon Englbrecht</div>
+            <div class="contact-tagline">Kaufmann · Mitgründer · Wirtschaftsinformatiker in spe</div>
+            <div class="contact-links">
+                <a href="mailto:timon.englbrecht@outlook.com" class="contact-link">
+                    <i class="fa-solid fa-envelope"></i> timon.englbrecht@outlook.com
+                </a>
+                <a href="tel:+4915226519552" class="contact-link">
+                    <i class="fa-solid fa-phone"></i> 0152 / 265 195 52
+                </a>
+                <a href="https://www.linkedin.com/in/timon-englbrecht-5a0610246/" target="_blank" rel="noopener" class="contact-link">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+            <div class="contact-divider">Bewerbungsunterlagen</div>
+            <!-- TODO: PDF-Datei unter assets/Bewerbungsunterlagen.pdf ablegen -->
+            <a href="assets/Bewerbungsunterlagen.pdf" download class="btn-pdf-large">
+                <i class="fa-solid fa-file-pdf"></i> Unterlagen herunterladen
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <p>© 2026 Timon Englbrecht</p>
+    </div>
+</footer>
+
+<script>
+    // ===== DARK MODE =====
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+
+    function syncThemeBtns() {
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        const cls = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        document.getElementById('themeBtnIcon').className    = cls;
+        document.getElementById('overlayThemeIcon').className = cls;
+    }
+    syncThemeBtns();
+
+    function toggleTheme() {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        syncThemeBtns();
+    }
+    document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+    document.getElementById('overlayThemeBtn').addEventListener('click', toggleTheme);
+
+    // ===== MODE CONTENT =====
+    const modeContent = {
+        uni: {
+            badge:     'Bewerber · HDBW München',
+            desc:      'Kaufmann für Versicherungen, Mitgründer — und jetzt der nächste Schritt: Wirtschaftsinformatik mit Schwerpunkt Mobile & Cloud an der HDBW und Praxiswissen mit fundierten Methoden verbinden.',
+            aboutP2:   'An der HDBW möchte ich Methoden kennenlernen, die ich bisher intuitiv angewandt habe — Prozessmodellierung, Cloud-Architekturen, Business Intelligence. Im direkten Austausch mit Lehrenden und Kommilitonen, nicht im anonymen Hörsaal.',
+            ctaText:   'Zur Bewerbungsmappe',
+            whyLabel:  'Warum HDBW?',
+            phrases:   [
+                'Wirtschaftsinformatiker in spe',
+                'HDBW München · Mobile & Cloud',
+                'Analytisch & lernmotiviert',
+                'Brückenbauer: BWL trifft IT',
+                'Digital affin seit Tag 1'
+            ]
+        },
+        work: {
+            badge:     'Werkstudent · FondsFinanz',
+            desc:      'Kaufmann für Versicherungen, Mitgründer und angehender Wirtschaftsinformatiker — ich kenne die Welt von FondsFinanz aus der Praxis und will dieses Wissen direkt einbringen.',
+            aboutP2:   'Von der API-Anbindung für V3IME bis zur eigenständigen HTML/JS-Entwicklung bei der Continentale: Ich sehe Lücken und schließe sie. Genau das möchte ich bei FondsFinanz einbringen — konkret, strukturiert, mit echtem Branchenverständnis.',
+            ctaText:   'Kontakt aufnehmen',
+            whyLabel:  'Warum FondsFinanz?',
+            phrases:   [
+                'Kaufmann für Versicherungen',
+                'Mitgründer & Unternehmer',
+                'Prozessautomatierer',
+                'FondsFinanz-Kenner aus der Praxis',
+                'Werkstudent bei FondsFinanz'
+            ]
+        }
+    };
+
+    // ===== TYPEWRITER =====
+    const twEl = document.getElementById('twText');
+    let twPhrases = [], pIdx = 0, cIdx = 0, deleting = false, twStarted = false;
+
+    function tick() {
+        const word = twPhrases[pIdx];
+        twEl.textContent = deleting ? word.slice(0, cIdx - 1) : word.slice(0, cIdx + 1);
+        deleting ? cIdx-- : cIdx++;
+        let delay = deleting ? 45 : 75;
+        if (!deleting && cIdx === word.length) { delay = 2200; deleting = true; }
+        else if (deleting && cIdx === 0)       { deleting = false; pIdx = (pIdx + 1) % twPhrases.length; delay = 350; }
+        setTimeout(tick, delay);
+    }
+
+    function startTypewriter(phrases) {
+        if (twStarted) return;
+        twStarted = true;
+        twPhrases = phrases;
+        pIdx = 0; cIdx = 0; deleting = false;
+        setTimeout(tick, 600);
+    }
+
+    // ===== APPLY MODE =====
+    function applyMode(m) {
+        const c = modeContent[m];
+        if (!c) return;
+
+        // Body class drives CSS show/hide of mode-specific elements
+        document.body.className = `mode-${m}`;
+
+        // Hero
+        document.querySelector('.badge-text').textContent = c.badge;
+        document.getElementById('heroDesc').textContent   = c.desc;
+        document.getElementById('heroCtaText').textContent = c.ctaText;
+
+        // "Why" button in hero
+        const whyBtn = document.getElementById('heroCtaWhy');
+        document.getElementById('heroCtaWhyText').textContent = c.whyLabel;
+        whyBtn.style.display = 'inline-flex';
+
+        // About paragraph 2
+        document.getElementById('aboutP2').textContent = c.aboutP2;
+
+        startTypewriter(c.phrases);
+    }
+
+    // ===== MODE SELECT =====
+    const overlay = document.getElementById('modeOverlay');
+    const params  = new URLSearchParams(window.location.search);
+    let   mode    = params.get('mode');
+
+    if (mode === 'uni' || mode === 'work') {
+        overlay.classList.add('hidden');
+        applyMode(mode);
+    } else {
+        document.querySelectorAll('.mode-card').forEach(card => {
+            card.addEventListener('click', () => {
+                mode = card.dataset.mode;
+                history.pushState(null, '', `?mode=${mode}`);
+                applyMode(mode);
+                overlay.classList.add('hidden');
+            });
+        });
+    }
+
+    // ===== SCROLL REVEAL =====
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ===== ACTIVE NAV LINK =====
+    const sections = document.querySelectorAll('section[id]');
+    const navAs    = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                navAs.forEach(a => a.classList.remove('active'));
+                const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                if (link) link.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    sections.forEach(s => navObserver.observe(s));
+</script>
+</body>
+</html>
